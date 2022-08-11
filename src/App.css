@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+
+.tab{
+  cursor: pointer;
+}
+.serchbar{
+  display: flex;
+ 
+}
+.serch{
+  margin-right: 20px;
+}
