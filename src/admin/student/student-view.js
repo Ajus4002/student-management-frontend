@@ -33,7 +33,7 @@ export default function Studentview({ id, onChange }) {
             <Row>
             <Col span={24}>
                     <b>Student Photo</b>
-                    <img style={{width:'150px',marginBottom:'30px'}} src={api.defaults.baseURL+'/uploads/'+data.image} >{}</img>
+                    <img style={{width:'120px',height: '120px',marginBottom:'30px', borderRadius: '50%'}} src={api.defaults.baseURL+'/uploads/'+data.image} >{}</img>
                 </Col>
                 <Col span={12}>
                     <b>Name</b>

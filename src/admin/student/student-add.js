@@ -10,6 +10,11 @@ export default function AddStudent(props) {
     const [form] = Form.useForm()
 
     async function onSubmit(data) {
+        if(!filename){
+            message.error("Upload the image")
+            return
+        }
+        
         data.image = filename
         try {
             setLoading(true)
@@ -44,7 +49,7 @@ export default function AddStudent(props) {
             
         }
 
-    },[])
+    },[props.id])
 
     const fileUpload = (e) => {
         if (e.file.status === 'done') {
@@ -57,10 +62,10 @@ export default function AddStudent(props) {
         <Card title= {props.id ?'UPDATE-STUDENT':'ADD-STUDENT'}>
             <Form form={form} onFinish={onSubmit} layout="vertical">
               
-        <Upload name="image" action={api.defaults.baseURL + '/student/upload'} onChange={fileUpload} listType="picture">
+        {/* <Upload name="image" action={api.defaults.baseURL + '/student/upload'} onChange={fileUpload} listType="picture">
         <Button icon={<UploadOutlined />}>Click to upload</Button>
                   </Upload>
-                 {props.id && <img style={{width:'150px',marginBottom:'30px',marginTop:'10px'}} src={api.defaults.baseURL+'/uploads/'+filename} >{}</img>} 
+                 {props.id && <img style={{width:'150px',marginBottom:'30px',marginTop:'10px'}} src={api.defaults.baseURL+'/uploads/'+filename} >{}</img>}  */}
                 <Form.Item label="Name" name="name" rules={[{ required: true, message: 'Please input Student name!' }]}>
                     <Input placeholder="Student Name"/>
                 </Form.Item>
@@ -69,7 +74,7 @@ export default function AddStudent(props) {
                     <Input  placeholder="Email ID"/>
                 </Form.Item>
 
-                <Form.Item label="Mobile Number" name="mobile" rules={[{ required: true, message: 'Please Enter Mobile No!' }]}>
+                <Form.Item label="Mobile Number" name="mobile" rules={[{ required: true,pattern:/^(\+\d{1,3}[- ]?)?\d{10}$/, message: 'Please Enter Mobile No!' }]}>
                     <Input  placeholder="Mobile No"/>
                 </Form.Item>
 
@@ -80,12 +85,15 @@ export default function AddStudent(props) {
                 <Form.Item label="Address" name="address" rules={[{ required: true, message: 'Please Enter address!' }]}>
                     <Input  placeholder="address"/>
                 </Form.Item>
-
-
-
-                <Form.Item>
+                <Form.Item label="Student Photo"  rules={[{ required: true, message: 'Please Upload the Image!' }]}>
+                <Upload name="image" action={api.defaults.baseURL + '/student/upload'}  onChange={fileUpload} onRemove={() => setFileName(null)} listType="picture">
+        <Button icon={<UploadOutlined />}>Click to upload</Button>
+                  </Upload>
+                 {props.id && <img style={{width:'150px',marginBottom:'30px',marginTop:'10px'}} src={api.defaults.baseURL+'/uploads/'+filename} >{}</img>} 
+                 </Form.Item>
+                <Form.Item style={{marginTop:'20px'}}>
                     <Button type="primary" htmlType="submit" loading={loading}>
-                       {props.id ?'updatestudent':'addstudent'}
+                       {props.id ?'Update-Student':'Add-Student'}
                     </Button> 
                    
                 </Form.Item>

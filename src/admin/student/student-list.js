@@ -183,6 +183,7 @@ export default function StudentList() {
         e.preventDefault()
         e.stopPropagation()
         const res = await api.delete('/deletestudent/'+record._id)
+        message.success("Student Deleted")
         loadData()
 
     }

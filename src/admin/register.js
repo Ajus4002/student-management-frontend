@@ -62,10 +62,17 @@ const navigate = useNavigate()
       {
         required: true,
         message: 'Please input your password!',
+        
       },
-    {min:6,
-    message:"password must minimum 6 chars"}
+      {
+        pattern:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
+        message: 'Minimum 6 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character',
+      }
+    
     ]}
+
+  
+    
   >
     <Input.Password />
   </Form.Item>
